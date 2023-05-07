@@ -5,11 +5,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class HomePage extends JFrame implements ActionListener {
+public class SignUpPage extends JFrame implements ActionListener {
 
     JButton close, save;
     JTextField userText, nameText, ageText, addressText,emailText,dobText,phoneText, nationalityText,genderText,passportText;
-    public HomePage(){
+    public SignUpPage(){
         setLayout(null);
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource(""));
@@ -118,12 +118,14 @@ public class HomePage extends JFrame implements ActionListener {
         save.setBounds(300, 530, 100, 40);
         save.setBackground(Color.black);
         save.setForeground(Color.white);
+        save.addActionListener(this);
         image.add(save);
 
          close = new JButton("Close");
         close.setBounds(430, 530, 100, 40);
         close.setBackground(Color.red);
         close.setForeground(Color.white);
+        close.addActionListener(this);
         image.add(close);
 
         setSize(800, 700);
@@ -133,7 +135,7 @@ public class HomePage extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent ae){
         String username = userText.getText();
-        String name = userText.getText();
+        String name = nameText.getText();
         String age = ageText.getText();
         String address = addressText.getText();
         String email = emailText.getText();
@@ -144,13 +146,24 @@ public class HomePage extends JFrame implements ActionListener {
 
         if(ae.getSource()==save){
 
+            try {
+                Connection connection = new Connection();
 
+                String query = "insert into signup values ('"+username+"', '"+name+"', '"+age+"', '"+address+"', '"+email+"', '"+dob+"', '"+phone+"', '"+gender+"', '"+passport+"')";
+                connection.s.executeUpdate(query);
+                JOptionPane.showMessageDialog(null, "Details filled successfully");
+
+                setVisible(false);
+
+            }catch (Exception e){
+                System.out.println("Exception in signup");
+            }
         }
-        else if(ae.getSource()==close){
-
+        if(ae.getSource()==close){
+                System.exit(0);
         }
     }
     public static void main(String[] args) {
-        new HomePage();
+        new SignUpPage();
     }
 }

@@ -9,9 +9,9 @@ public class Connection {
 
     public Connection(){
         try{
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
-            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/OnlineReservation","root", "nitin");
+            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/onlinereservation","root", "nitin");
 
             s = c.createStatement();
 
